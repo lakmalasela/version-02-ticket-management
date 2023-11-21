@@ -1,106 +1,86 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Items'"></app-page-header>
+    <app-page-header [heading]="'New Item'"></app-page-header>
 
     <div class="row mb-4">
-        <div class="col-lg-12">
-            <form #form="ngForm" (submit)="onSubmit(form)">
-
-
+        <div class="col-md-12">
+            <form [formGroup]="itemgroup"  (submit)="onSubmit(form)">
                 <div class="row">
-                    <div class="col-md-8">
+
+                    <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label>Item Name</label>
-                            <input
-                                class="form-control"
-                                [ngClass]="{ 'invalid-input': itemname.invalid && itemname.dirty }"
-                                pattern="^[A-Z][a-z]*(\s[A-Z][a-z]*)*$"
-                                required
-                                name="itemname"
-                                #itemname="ngModel"
-                                [(ngModel)]="service.fromData.fullname"
-                            />
-        
-                            <div *ngIf="itemname.invalid && (itemname.dirty || itemname.touched)" class="error-message">
-                                <div *ngIf="fullname.errors?.required">Item Name is required</div>
-                                <div *ngIf="fullname.errors?.pattern">Enter a valid Item Name</div>
-                            </div>
+                            <label for="inputquantity4">Serial No*</label>
+                            <input type="text"  class="form-control" formControlName="serialno" readonly>
                         </fieldset>
-        
-                    </div>
-
-                    <div class="col-md-4">
-
-                                   
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Item Type</label>
-                    <select
-                        class="form-control"
-                        required
-                        id="exampleFormControlSelect1"
-                        #itemtype="ngModel"
-                        name="civilstatus"
-                        [(ngModel)]="service.fromData.civilstatus"
-                        [ngModelOptions]="{ standalone: true }"
-                    >
-                        <option>Select Item Type</option>
-                        <option *ngFor="let status of civilstatus">{{ status }}</option>
-                    </select>
-
-                    <div
-                        *ngIf="itemtype.invalid && (itemtype.dirty || itemtype.touched)"
-                        class="error-message"
-                    >
-                        <div *ngIf="itemtype.errors?.required">Item Type no required</div>
-                        <div class="text-danger">Please select a Item Type.</div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mt-4">
+                            <label for="exampleFormControlSelect1">Item Name</label>
+                            <input id="typeahead-format" placeholder="New type" formControlName="Itemname" type="text"  [ngClass]="{ 'is-invalid': submitted && f.Itemname.errors }"
+                             class="form-control" />
+                            <div *ngIf="submitted && f.Itemname.errors" class="invalid-feedback">
+                              <div *ngIf="f.Itemname.errors.required">Item name is required</div>
+                            </div>
+                        </div>
+                      
+                    </div>
 
-
+                    <div class="col-md-6">
+                        <div class="form-group mt-4">
+                            <label for="exampleFormControlSelect1">Unitprice</label>
+                            <input id="typeahead-format" placeholder="unit Price" formControlName="Unitprice" type="number"  [ngClass]="{ 'is-invalid': submitted && f.Unitprice.errors }"
+                             class="form-control" />
+                            <div *ngIf="submitted && f.Itemname.errors" class="invalid-feedback">
+                              <div *ngIf="f.Itemname.errors.required">Item name is required</div>
+                              <div *ngIf="submitted && f.Unitprice.errors" class="invalid-feedback">
+                                <div *ngIf="f.Unitprice.errors.required">unit price is required</div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-8">
-                            
-                        <fieldset class="form-group">
-                            <label>Serial No</label>
-                            <input
-                                name="nic"
-                                [ngClass]="{ 'invalid-input': serialno.invalid && serialno.dirty }"
-                                pattern="^(([0-9]{9}[vVxX])|([0-2]{12}))$"
-                                required
-                                #serialno="ngModel"
-                                [(ngModel)]="service.fromData.nic"
-                                class="form-control"
-                            />
-        
-                            <div *ngIf="serialno.invalid && (serialno.dirty || serialno.touched)" class="error-message">
-                                <div *ngIf="nic.errors?.required">Serial No is required</div>
-                                <div *ngIf="nic.errors?.pattern">Enter a valid Serial No</div>
-                            </div>
-                            <!-- <div *ngIf="!nic.valid && nic.dirty">
-                                NIC is invalid.
-                            </div> -->
-                        </fieldset>
-        
-                    </div>
-                    <div class="col-md-4">
-                            
-                <div class="mt-4">
-                    <button class="btn btn-success button-items" type="submit">Add</button>
-                    <button class="btn btn-warning button-items" type="button" (click)="UpdateEmployee(form)">Update</button>
-                    <button class="btn btn-primary button-items" type="button" (click)="resetData(form)">Reset</button>
-                </div>
+                    <div class="col-md-6">
+                        <label for="exampleFormControlSelect1">Issue Type</label>
+                        <select   [ngClass]="{
+                            'is-invalid':
+                                submitted && f.itemType.errors
+                        }" class="form-control" formControlName="itemType">
+                            <option *ngFor="let issue of ItemTypeList" [ngValue]="issue.id"  >{{issue?.name}}
+                            </option>
+                         </select>
+                        <div *ngIf="submitted && f.itemType.errors" class="invalid-feedback">
+                          <div *ngIf="f.itemType.errors.required">
+                            Issue type is required
+                          </div>
+                        </div>
+
                     </div>
                 </div>
-              
              
+
+
+          <div class="row">
+            <div class="col-md-6">
+                <div class="mt-4">
+                    <button class="btn btn-success btn-add" type="submit">Add</button>
+                    <button class="btn btn-warning button-set" type="button" (click)="UpdateItem()">Update</button>
+                    <button class="btn btn-primary button-set" type="button" (click)="resetData()">Reset</button>
+                </div>
+            </div>
+
+            <div class="col-md-6"></div>
+          </div>     
+
               
 
             </form>
         </div>
-       
+        
     </div>
+
 
     <div class="container mt-4">
         <div class="row">
