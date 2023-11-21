@@ -6862,17 +6862,10 @@
   "resolved" "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
   "version" "6.3.1"
 
-"semver@^7.0.0", "semver@^7.1.1", "semver@^7.3.5", "semver@^7.3.8", "semver@7.5.3":
+"semver@^7.0.0", "semver@^7.1.1", "semver@^7.3.5", "semver@^7.3.8", "semver@^7.5.3", "semver@7.5.3":
   "integrity" "sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ=="
   "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.3.tgz"
   "version" "7.5.3"
-  dependencies:
-    "lru-cache" "^6.0.0"
-
-"semver@^7.5.3":
-  "integrity" "sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA=="
-  "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.4.tgz"
-  "version" "7.5.4"
   dependencies:
     "lru-cache" "^6.0.0"
 
@@ -7959,7 +7952,12 @@
     "options" ">=0.0.5"
     "ultron" "1.0.x"
 
-"ws@^8.4.2", "ws@~8.11.0":
+"ws@^8.4.2":
+  "integrity" "sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg=="
+  "resolved" "https://registry.npmjs.org/ws/-/ws-8.11.0.tgz"
+  "version" "8.11.0"
+
+"ws@~8.11.0":
   "integrity" "sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg=="
   "resolved" "https://registry.npmjs.org/ws/-/ws-8.11.0.tgz"
   "version" "8.11.0"
