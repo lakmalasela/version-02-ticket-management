@@ -23,12 +23,14 @@ export class ItemsComponent implements OnInit {
       branch:any[];
       employeeFields : string[] = ["Id","Itemname","Unitprice","itemType","Action"];
       itemListArray:any;
-      displayedColumns: string[] = ["id", "Item Name", "Unit Price", "Issue Type","branch"];
+      displayedColumns: string[] = ["id", "Item Name", "Unit Price", "Item Type"];
 
 
 
       ItemTypeList =[{name:'Hardware',id:2},{name:'Software',id:1}]
       itemgroup:FormGroup;
+
+      ticketList: any;
 
       constructor(private router: Router,public commonService: ComonService,public service: EmployeeService,private toastr: ToastrService,private fb:FormBuilder) {}
 
@@ -46,10 +48,11 @@ export class ItemsComponent implements OnInit {
     })
 
 
+
     this.commonService.getInventory()
     .subscribe
-    (res=>{
-        this.itemListArray = res;
+    ( (result:any)=>{
+        this.itemListArray = result.data;
     })
 
  }
@@ -86,6 +89,10 @@ UpdateItem(){
                     this.loadDefaultData();
                 }
             )
+}
+
+ fillData(obj:any){
+    this.commonService = Object.assign({},obj) ;   
 }
 
 
